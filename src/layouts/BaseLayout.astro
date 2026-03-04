@@ -1,0 +1,33 @@
+---
+// src/layouts/BaseLayout.astro
+// 페이지마다 제목과 검색 차단 여부를 다르게 받을 수 있도록 설정합니다.
+const { title, noindex = false } = Astro.props;
+---
+
+<html lang="ko">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>{title}</title>
+    {noindex && <meta name="robots" content="noindex, nofollow" />}
+  </head>
+  <body class="bg-white text-gray-900 max-w-3xl mx-auto px-6 sm:px-8">
+    
+    <header class="py-10 flex justify-between items-center border-b border-gray-200 mb-10">
+      <a href="/" class="text-xl font-bold tracking-tight">Kihan</a>
+      <nav class="space-x-6 text-sm font-medium">
+        <a href="/" class="hover:text-blue-600 transition-colors">About</a>
+        <a href="/projects" class="hover:text-blue-600 transition-colors">Projects</a>
+        <a href="/cv" class="hover:text-blue-600 transition-colors">CV</a>
+      </nav>
+    </header>
+
+    <main>
+      <slot />
+    </main>
+
+    <footer class="py-10 text-center text-sm text-gray-500 mt-20 border-t border-gray-100">
+      &copy; {new Date().getFullYear()} Kihan. All rights reserved.
+    </footer>
+  </body>
+</html>

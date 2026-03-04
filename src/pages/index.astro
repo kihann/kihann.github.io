@@ -1,17 +1,26 @@
 ---
-
+// src/pages/index.astro
+import BaseLayout from '../layouts/BaseLayout.astro';
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
-</html>
+<BaseLayout title="Kihan | AI/ML Researcher">
+  <div class="flex flex-col-reverse sm:flex-row gap-8 items-center sm:items-start">
+    <div class="flex-1">
+      <h1 class="text-4xl font-extrabold mb-4 tracking-tight">Kihan</h1>
+      <h2 class="text-xl text-gray-600 mb-6">AI/ML Researcher & Engineer</h2>
+      
+      <div class="prose prose-gray max-w-none text-justify">
+        <p class="mb-4">
+          안녕하세요. AI/ML 리서처를 목표로 연구와 개발을 병행하고 있는 Kihan입니다. 
+          데이터의 이면에 숨겨진 패턴을 발견하고, 이를 최적화된 아키텍처로 구현하는 과정에 관심이 많습니다.
+        </p>
+        <p>
+          주요 관심 분야는 [관심 분야 1], [관심 분야 2] 이며, 모델의 성능 향상뿐만 아니라 엔지니어링 관점에서의 효율적인 서빙 구조를 고민합니다.
+        </p>
+      </div>
+    </div>
+    
+    <div class="w-40 h-40 sm:w-48 sm:h-48 bg-gray-200 rounded-full flex-shrink-0">
+      </div>
+  </div>
+</BaseLayout>

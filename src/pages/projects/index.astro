@@ -1,0 +1,34 @@
+---
+// src/pages/projects/index.astro
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
+
+// projects 컬렉션의 모든 글을 가져와서 날짜 최신순으로 정렬
+const allProjects = await getCollection('projects');
+allProjects.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+---
+
+<BaseLayout title="Projects & Publications | Kihan">
+  <div class="mb-10 border-b border-gray-200 pb-4">
+    <h1 class="text-3xl font-bold tracking-tight text-gray-900">Projects & Publications</h1>
+    <p class="text-gray-600 mt-2">지금까지 진행한 연구 및 엔지니어링 프로젝트 목록입니다.</p>
+  </div>
+
+  <ul class="space-y-8">
+    {allProjects.map((project) => (
+      <li class="group">
+        <span class="text-sm font-mono text-gray-500 block mb-1">
+          {project.data.pubDate.toISOString().slice(0, 10)}
+        </span>
+        <a href={`/projects/${project.slug}`} class="block">
+          <h2 class="text-xl font-semibold text-gray-900 group-hover:text-blue-600 transition-colors">
+            {project.data.title}
+          </h2>
+        </a>
+        <p class="text-gray-600 mt-2 text-sm leading-relaxed">
+          {project.data.description}
+        </p>
+      </li>
+    ))}
+  </ul>
+</BaseLayout>

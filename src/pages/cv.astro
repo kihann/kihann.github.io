@@ -1,0 +1,25 @@
+---
+// src/pages/cv.astro
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout title="Curriculum Vitae | Kihan" noindex={true}>
+  <div class="mb-8">
+    <h1 class="text-3xl font-bold tracking-tight mb-2">Curriculum Vitae</h1>
+    <p class="text-sm font-medium text-red-500 bg-red-50 inline-block px-2 py-1 rounded">
+      🔒 이 페이지는 검색엔진에 노출되지 않습니다.
+    </p>
+  </div>
+
+  <div class="prose prose-gray max-w-none">
+    <h3>Education</h3>
+    <ul>
+      <li>[학위 및 학교 이름], [연도]</li>
+    </ul>
+
+    <h3>Experience</h3>
+    <ul>
+      <li>[현재 직장명] - AI Engineer, [연도]</li>
+    </ul>
+  </div>
+</BaseLayout>
