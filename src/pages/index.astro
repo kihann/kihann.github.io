@@ -1,26 +1,106 @@
 ---
-// src/pages/index.astro
-import BaseLayout from '../layouts/BaseLayout.astro';
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { SITE_TITLE, SITE_DESCRIPTION, PROFILE } from "../consts";
+import { marked } from 'marked';
+
+const aboutHtml = marked.parse(PROFILE.about);
 ---
 
-<BaseLayout title="Kihan | AI/ML Researcher">
-  <div class="flex flex-col-reverse sm:flex-row gap-8 items-center sm:items-start">
-    <div class="flex-1">
-      <h1 class="text-4xl font-extrabold mb-4 tracking-tight">Kihan</h1>
-      <h2 class="text-xl text-gray-600 mb-6">AI/ML Researcher & Engineer</h2>
+<BaseLayout title={SITE_TITLE} description={SITE_DESCRIPTION} showSidebar={true}>
+  <!-- Sophisticated Minimal Header -->
+  <header class="mb-24 pt-12">
+    <div class="flex flex-col md:flex-row gap-12 items-start md:items-center">
+      <div class="relative group flex-shrink-0">
+        <div class="absolute -inset-2 bg-gradient-to-br from-sky-500/10 to-transparent rounded-[2.5rem] blur-2xl opacity-0 group-hover:opacity-100 transition duration-500"></div>
+        <img
+          src={PROFILE.avatar} 
+          alt={PROFILE.name}
+          width="160"
+          height="160"
+          class="relative w-32 h-32 md:w-40 md:h-40 object-cover rounded-[2rem] shadow-sm border border-[var(--border-color)]"
+        />
+      </div>
       
-      <div class="prose prose-gray max-w-none text-justify">
-        <p class="mb-4">
-          안녕하세요. AI/ML 리서처를 목표로 연구와 개발을 병행하고 있는 Kihan입니다. 
-          데이터의 이면에 숨겨진 패턴을 발견하고, 이를 최적화된 아키텍처로 구현하는 과정에 관심이 많습니다.
-        </p>
-        <p>
-          주요 관심 분야는 [관심 분야 1], [관심 분야 2] 이며, 모델의 성능 향상뿐만 아니라 엔지니어링 관점에서의 효율적인 서빙 구조를 고민합니다.
-        </p>
+      <div class="flex-grow">
+        <div class="flex items-center gap-3 mb-2">
+          <h1 class="text-4xl font-bold tracking-tight text-[var(--text-color)]">{PROFILE.name}</h1>
+        </div>
+        <p class="text-lg text-[var(--secondary-text)] font-medium mb-6">{PROFILE.title}</p>
+        
+        <div class="flex flex-wrap gap-2.5">
+          <span class="badge">
+            <span class="badge-dot tech-python"></span>
+            Python
+          </span>
+          <span class="badge">
+            <span class="badge-dot tech-pytorch"></span>
+            PyTorch
+          </span>
+          <span class="badge">
+            <span class="badge-dot tech-jax"></span>
+            JAX
+          </span>
+          <span class="badge">Generative AI</span>
+        </div>
       </div>
     </div>
-    
-    <div class="w-40 h-40 sm:w-48 sm:h-48 bg-gray-200 rounded-full flex-shrink-0">
+  </header>
+
+  <div class="space-y-24">
+    <!-- About Section -->
+    <section class="max-w-3xl">
+      <h2 class="text-xs font-bold uppercase tracking-[0.2em] text-sky-600 dark:text-sky-400 mb-6">Introduction</h2>
+      <div 
+        class="prose dark:prose-invert prose-p:text-[var(--secondary-text)] prose-p:text-lg prose-p:leading-relaxed"
+        set:html={aboutHtml}
+      />
+      
+      <div class="mt-10 flex items-center gap-6">
+        <a href={`mailto:${PROFILE.links.email}`} class="group flex items-center gap-2 text-sm font-semibold text-[var(--text-color)] hover:text-sky-600 transition-colors">
+          <span>Email</span>
+          <svg class="w-3.5 h-3.5 transform group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+        </a>
+        <a href={PROFILE.links.github} target="_blank" class="group flex items-center gap-2 text-sm font-semibold text-[var(--text-color)] hover:text-sky-600 transition-colors">
+          <span>GitHub</span>
+          <svg class="w-3.5 h-3.5 transform group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+        </a>
       </div>
+    </section>
+
+    <!-- News & Selected Publications Grid -->
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-16">
+      <!-- News -->
+      <section>
+        <h2 class="text-xs font-bold uppercase tracking-[0.2em] text-sky-600 dark:text-sky-400 mb-8">Latest Updates</h2>
+        <div class="space-y-8">
+          <div class="relative pl-6 border-l border-[var(--border-color)] group">
+            <div class="absolute -left-[4.5px] top-1.5 w-2 h-2 rounded-full bg-[var(--border-color)] group-hover:bg-sky-500 transition-colors"></div>
+            <time class="block text-[10px] font-bold font-mono text-[var(--secondary-text)] mb-1">2026.03</time>
+            <p class="text-sm text-[var(--secondary-text)] group-hover:text-[var(--text-color)] transition-colors leading-snug">Launched the new research portfolio with optimized readability.</p>
+          </div>
+          <div class="relative pl-6 border-l border-[var(--border-color)] group">
+            <div class="absolute -left-[4.5px] top-1.5 w-2 h-2 rounded-full bg-[var(--border-color)] group-hover:bg-sky-500 transition-colors"></div>
+            <time class="block text-[10px] font-bold font-mono text-[var(--secondary-text)] mb-1">2026.01</time>
+            <p class="text-sm text-[var(--secondary-text)] group-hover:text-[var(--text-color)] transition-colors leading-snug">Started deep-dive into Generative Agents for code generation tasks.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Publications -->
+      <section>
+        <h2 class="text-xs font-bold uppercase tracking-[0.2em] text-sky-600 dark:text-sky-400 mb-8">Selected Work</h2>
+        <div class="space-y-4">
+          <div class="content-card group">
+            <span class="inline-block text-[10px] font-bold text-sky-600 dark:text-sky-400 mb-3 px-2 py-0.5 bg-sky-50 dark:bg-sky-950/30 rounded">CML 2026</span>
+            <h3 class="text-base font-bold mb-2 group-hover:text-sky-600 transition-colors leading-tight">"An Empirical Study on Generative AI for Code"</h3>
+            <p class="text-xs text-[var(--secondary-text)] mb-4 italic">Kihan Lee, Jane Doe, John Smith</p>
+            <div class="flex gap-4 border-t border-[var(--border-color)] pt-4">
+              <a href="#" class="text-[10px] font-bold uppercase tracking-widest hover:text-sky-600 transition-colors">PDF</a>
+              <a href="#" class="text-[10px] font-bold uppercase tracking-widest hover:text-sky-600 transition-colors">Code</a>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
   </div>
 </BaseLayout>

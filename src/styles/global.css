@@ -1,1 +1,120 @@
-@import "tailwindcss";
+@font-face {
+  font-family: 'NanumSquare';
+  font-weight: 300;
+  src: url('/fonts/NanumSquare_acL.ttf') format('truetype');
+  font-display: swap;
+}
+@font-face {
+  font-family: 'NanumSquare';
+  font-weight: 400;
+  src: url('/fonts/NanumSquare_acR.ttf') format('truetype');
+  font-display: swap;
+}
+@font-face {
+  font-family: 'NanumSquare';
+  font-weight: 700;
+  src: url('/fonts/NanumSquare_acB.ttf') format('truetype');
+  font-display: swap;
+}
+@font-face {
+  font-family: 'NanumSquare';
+  font-weight: 800;
+  src: url('/fonts/NanumSquare_acEB.ttf') format('truetype');
+  font-display: swap;
+}
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --bg-color: #fdfdfd;      /* Very light off-white */
+    --surface-color: #ffffff; /* Pure white for cards */
+    --text-color: #1a1a1a;    /* Soft black */
+    --accent-color: #003366;  /* Sophisticated Navy */
+    --secondary-text: #555555;
+    --border-color: #efefef;
+    --code-bg: #f8f9fa;
+  }
+
+  html.dark {
+    --bg-color: #0d0d0d;
+    --surface-color: #151515;
+    --text-color: #e5e5e5;
+    --accent-color: #7dd3fc;
+    --secondary-text: #999999;
+    --border-color: #1f1f1f;
+    --code-bg: #1a1a1a;
+  }
+
+  html {
+    font-size: 16px;
+    scroll-behavior: smooth;
+    /* Prevent subpixel artifacts on high-res screens by resetting smoothing */
+    -webkit-font-smoothing: auto;
+    -moz-osx-font-smoothing: auto;
+    text-rendering: auto;
+  }
+
+  html,
+  body {
+    font-family: 'Inter', 'NanumSquare', system-ui, sans-serif !important;
+    @apply h-full w-full selection:bg-sky-100 dark:selection:bg-sky-900/30 transition-colors duration-200;
+  }
+
+  body {
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    margin: 0;
+    padding: 0;
+    line-height: 1.7;
+    font-weight: 400;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'NanumSquare', sans-serif !important;
+    @apply font-bold tracking-tight text-[var(--text-color)];
+  }
+
+  /* Refined Tech Badges */
+  .badge {
+    @apply inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-md border border-[var(--border-color)] text-[11px] font-semibold text-[var(--secondary-text)] bg-[var(--surface-color)] shadow-sm;
+  }
+  
+  .badge-dot {
+    @apply w-1.5 h-1.5 rounded-full;
+  }
+
+  .tech-python { background-color: #3572A5; }
+  .tech-pytorch { background-color: #EE4C2C; }
+  .tech-jax { background-color: #4285F4; }
+  .tech-transformers { background-color: #FFD21E; }
+
+  /* Prose / Markdown */
+  .prose {
+    font-family: 'NanumSquare', sans-serif !important;
+    max-width: 72ch !important;
+    @apply text-[var(--text-color)];
+  }
+
+  .prose a {
+    @apply underline underline-offset-4 decoration-sky-200 dark:decoration-sky-900 hover:decoration-[var(--accent-color)] transition-all;
+  }
+  
+  .prose code {
+    @apply bg-[var(--code-bg)] px-1.5 py-0.5 rounded text-[0.9em] font-mono border border-[var(--border-color)] text-[var(--accent-color)] before:content-none after:content-none;
+  }
+
+  /* Sophisticated Card Style */
+  .content-card {
+    @apply p-6 rounded-xl border border-[var(--border-color)] bg-[var(--surface-color)] hover:border-sky-200 dark:hover:border-sky-900 transition-all duration-300 shadow-sm;
+  }
+
+  .nav-header {
+    @apply sticky top-0 z-50 border-b border-[var(--border-color)] bg-[var(--bg-color)]/80 backdrop-blur-md;
+  }
+}

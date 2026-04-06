@@ -1,0 +1,82 @@
+---
+import { getCollection, render } from "astro:content";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+
+export async function getStaticPaths() {
+    const projects = await getCollection("projects");
+    return projects.map((project) => ({
+        params: { id: project.id },
+        props: { project },
+    }));
+}
+
+const { project } = Astro.props;
+const { Content } = await render(project);
+---
+
+<BaseLayout
+    title={project.data.title}
+    description={project.data.description}
+    image={project.data.heroImage}
+>
+    <article class="max-w-3xl mx-auto w-full mt-12 mb-20">
+        {
+            project.data.heroImage && (
+                <div class="relative group mb-12">
+                     <div class="absolute inset-0 bg-gradient-to-tr from-[var(--accent-color)] to-purple-400 opacity-10 blur-2xl rounded-3xl group-hover:opacity-20 transition-opacity duration-500"></div>
+                    <img
+                        src={project.data.heroImage}
+                        alt=""
+                        class="relative w-full h-auto rounded-3xl shadow-xl shadow-[var(--accent-color)]/5 border border-black/5 dark:border-white/5"
+                    />
+                </div>
+            )
+        }
+        <h1
+            class="text-4xl md:text-5xl font-extrabold tracking-tight mb-6 text-gray-900 dark:text-gray-50 leading-tight"
+        >
+            {project.data.title}
+        </h1>
+        
+        <div
+            class="flex flex-wrap items-center gap-4 mb-10"
+        >
+            <div class="px-3 py-1 bg-[var(--accent-color)]/10 text-[var(--accent-color)] rounded-full font-mono text-sm font-semibold">
+                <time datetime={project.data.pubDate.toISOString()}>
+                    {
+                        project.data.pubDate.toLocaleDateString("en-us", {
+                            year: "numeric",
+                            month: "long",
+                            day: "numeric",
+                        })
+                    }
+                </time>
+            </div>
+            
+            {
+                project.data.categories && (
+                    <div class="flex gap-2">
+                        {project.data.categories.map((c: string) => (
+                            <span class="px-3 py-1 bg-gray-100 dark:bg-slate-800 text-gray-600 dark:text-gray-400 text-xs font-semibold rounded-full border border-gray-200/50 dark:border-slate-700/50">
+                                {c}
+                            </span>
+                        ))}
+                    </div>
+                )
+            }
+        </div>
+
+        <div
+            class="prose dark:prose-invert prose-lg max-w-none prose-p:leading-relaxed prose-headings:font-bold prose-a:text-[var(--accent-color)] hover:prose-a:text-[var(--hover-color)] prose-img:rounded-2xl"
+        >
+            <Content />
+        </div>
+
+        <div class="mt-20 pt-10 border-t border-gray-100 dark:border-slate-800">
+            <a href="/projects" class="inline-flex items-center gap-2 text-gray-500 hover:text-[var(--accent-color)] font-medium transition-colors">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path></svg>
+                Back to Projects
+            </a>
+        </div>
+    </article>
+</BaseLayout>

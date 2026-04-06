@@ -1,0 +1,55 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { getCollection } from "astro:content";
+
+const posts = (await getCollection("blog")).sort(
+    (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
+);
+
+const groupedPosts = posts.reduce((acc, post) => {
+    const year = post.data.pubDate.getFullYear();
+    if (!acc[year]) acc[year] = [];
+    acc[year].push(post);
+    return acc;
+}, {} as Record<number, typeof posts>);
+
+const sortedYears = Object.keys(groupedPosts)
+    .map(Number)
+    .sort((a, b) => b - a);
+---
+
+<BaseLayout title="Blog" description="My blog posts" showSidebar={true}>
+    <h1 class="text-3xl font-bold mb-8">Blog</h1>
+
+    <div class="space-y-12">
+        {
+            sortedYears.map((year) => (
+                <section>
+                    <h2 class="text-2xl font-bold border-b border-gray-200 dark:border-gray-800 pb-2 mb-4 text-gray-800 dark:text-gray-200">
+                        {year}
+                    </h2>
+                    <ul class="space-y-4">
+                        {groupedPosts[year].map((post) => (
+                            <li class="relative group">
+                                <a
+                                    href={`/blog/${post.id}/`}
+                                    class="flex flex-col sm:flex-row sm:items-baseline gap-2 sm:gap-6 p-4 -mx-4 rounded-2xl hover:bg-gray-50 dark:hover:bg-slate-800/50 transition-colors duration-300 no-underline"
+                                >
+                                    <span class="text-gray-500 dark:text-gray-400 font-mono text-sm sm:w-24 flex-shrink-0 pt-1">
+                                        {post.data.pubDate.toLocaleDateString(
+                                            "en-us",
+                                            { month: "short", day: "numeric" }
+                                        )}
+                                    </span>
+                                    <span class="text-lg font-bold text-gray-900 dark:text-gray-100 group-hover:text-[var(--accent-color)] transition-colors duration-300">
+                                        {post.data.title}
+                                    </span>
+                                </a>
+                            </li>
+                        ))}
+                    </ul>
+                </section>
+            ))
+        }
+    </div>
+</BaseLayout>

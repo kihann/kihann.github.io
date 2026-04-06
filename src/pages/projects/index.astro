@@ -1,34 +1,61 @@
 ---
-// src/pages/projects/index.astro
-import BaseLayout from '../../layouts/BaseLayout.astro';
-import { getCollection } from 'astro:content';
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { getCollection } from "astro:content";
 
-// projects 컬렉션의 모든 글을 가져와서 날짜 최신순으로 정렬
-const allProjects = await getCollection('projects');
-allProjects.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+const projects = (await getCollection("projects")).sort(
+  (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
+);
 ---
 
-<BaseLayout title="Projects & Publications | Kihan">
-  <div class="mb-10 border-b border-gray-200 pb-4">
-    <h1 class="text-3xl font-bold tracking-tight text-gray-900">Projects & Publications</h1>
-    <p class="text-gray-600 mt-2">지금까지 진행한 연구 및 엔지니어링 프로젝트 목록입니다.</p>
-  </div>
+<BaseLayout title="Projects | Kihan Lee" description="A collection of my recent projects and work in AI. " showSidebar={true}>
+  <h1 class="text-3xl font-bold mb-8 text-gray-900 dark:text-gray-100">
+    Projects
+  </h1>
 
-  <ul class="space-y-8">
-    {allProjects.map((project) => (
-      <li class="group">
-        <span class="text-sm font-mono text-gray-500 block mb-1">
-          {project.data.pubDate.toISOString().slice(0, 10)}
-        </span>
-        <a href={`/projects/${project.slug}`} class="block">
-          <h2 class="text-xl font-semibold text-gray-900 group-hover:text-blue-600 transition-colors">
-            {project.data.title}
-          </h2>
+  <p class="text-gray-700 dark:text-gray-300 mb-12">
+    A selection of projects I've worked on.
+  </p>
+
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+    {
+      projects.map((project) => (
+        <a href={`/projects/${project.id}`} class="group block no-underline outline-none">
+          <div class="h-full rounded-2xl overflow-hidden bg-white dark:bg-slate-900/40 border border-gray-200/60 dark:border-slate-800/60 hover:border-[var(--accent-color)]/30 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:shadow-[var(--accent-color)]/10">
+            <div class="overflow-hidden">
+              {project.data.heroImage ? (
+                <img
+                  src={project.data.heroImage}
+                  alt={project.data.title}
+                  class="w-full h-48 object-cover transition-transform duration-500 group-hover:scale-105"
+                />
+              ) : (
+                <div class="w-full h-48 bg-gray-50 dark:bg-slate-800/50 flex items-center justify-center transition-transform duration-500 group-hover:scale-105">
+                  <span class="text-gray-400 dark:text-gray-500 text-sm font-medium tracking-wide">
+                    No image available
+                  </span>
+                </div>
+              )}
+            </div>
+            <div class="p-6">
+              <h2 class="text-xl font-bold text-gray-900 dark:text-white group-hover:text-[var(--accent-color)] transition-colors mb-2">
+                {project.data.title}
+              </h2>
+              <p class="text-sm text-gray-600 dark:text-gray-400 mb-4 line-clamp-2">
+                {project.data.description}
+              </p>
+              {project.data.categories && project.data.categories.length > 0 && (
+                <div class="flex flex-wrap gap-2">
+                  {project.data.categories.map((category) => (
+                    <span class="px-2 py-1 bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-400 text-xs rounded-md">
+                      {category}
+                    </span>
+                  ))}
+                </div>
+              )}
+            </div>
+          </div>
         </a>
-        <p class="text-gray-600 mt-2 text-sm leading-relaxed">
-          {project.data.description}
-        </p>
-      </li>
-    ))}
-  </ul>
+      ))
+    }
+  </div>
 </BaseLayout>

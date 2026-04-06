@@ -1,25 +1,173 @@
 ---
-// src/pages/cv.astro
-import BaseLayout from '../layouts/BaseLayout.astro';
+import BaseLayout from "../layouts/BaseLayout.astro";
 ---
 
-<BaseLayout title="Curriculum Vitae | Kihan" noindex={true}>
-  <div class="mb-8">
-    <h1 class="text-3xl font-bold tracking-tight mb-2">Curriculum Vitae</h1>
-    <p class="text-sm font-medium text-red-500 bg-red-50 inline-block px-2 py-1 rounded">
-      🔒 이 페이지는 검색엔진에 노출되지 않습니다.
-    </p>
+<BaseLayout title="CV" description="My Curriculum Vitae">
+  <div
+    class="flex justify-between items-center mb-8 border-b border-gray-200 dark:border-gray-800 pb-4"
+  >
+    <h1 class="text-3xl font-bold text-gray-900 dark:text-gray-100 m-0">
+      Curriculum Vitae
+    </h1>
+    <a
+      href="/cv.pdf"
+      class="px-4 py-2 bg-[var(--accent-color)] hover:bg-[var(--hover-color)] text-white rounded-md transition-colors font-medium text-sm flex items-center gap-2 shadow-sm"
+      target="_blank"
+      rel="noopener noreferrer"
+    >
+      <svg
+        class="w-4 h-4"
+        fill="none"
+        stroke="currentColor"
+        viewBox="0 0 24 24"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="2"
+          d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
+        ></path>
+      </svg>
+      Download PDF
+    </a>
   </div>
 
-  <div class="prose prose-gray max-w-none">
-    <h3>Education</h3>
-    <ul>
-      <li>[학위 및 학교 이름], [연도]</li>
-    </ul>
+  <div class="prose dark:prose-invert prose-lg max-w-none prose-p:text-gray-600 dark:prose-p:text-gray-300">
+    <section class="mb-14">
+      <div class="flex items-center gap-4 mb-6">
+        <h2 class="text-2xl font-bold font-sans text-gray-900 dark:text-gray-50 m-0">Education</h2>
+        <div class="flex-grow h-px bg-gray-200 dark:bg-slate-800"></div>
+      </div>
+      
+      <div class="group p-5 -mx-5 rounded-2xl hover:bg-gray-50 dark:hover:bg-slate-800/50 transition-colors duration-300">
+        <div
+          class="flex flex-col md:flex-row justify-between md:items-baseline mb-2"
+        >
+          <h3
+            class="text-xl font-bold m-0 text-gray-900 dark:text-gray-100 group-hover:text-[var(--accent-color)] transition-colors"
+          >
+            University Name
+          </h3>
+          <span class="text-[var(--accent-color)] font-mono text-sm font-semibold mt-1 md:mt-0 bg-[var(--accent-color)]/10 px-3 py-1 rounded-full"
+            >2020 - 2024</span
+          >
+        </div>
+        <div class="text-lg text-gray-700 dark:text-gray-200 mb-3 font-medium">
+          B.S. in Computer Science
+        </div>
+        <p class="text-gray-600 dark:text-gray-400 mt-0 leading-relaxed">
+          Graduated with honors. Coursework included Machine Learning, Data
+          Structures, Operating Systems, and Distributed Computing.
+        </p>
+      </div>
+    </section>
 
-    <h3>Experience</h3>
-    <ul>
-      <li>[현재 직장명] - AI Engineer, [연도]</li>
-    </ul>
+    <section class="mb-14">
+      <div class="flex items-center gap-4 mb-6">
+        <h2 class="text-2xl font-bold font-sans text-gray-900 dark:text-gray-50 m-0">Experience</h2>
+        <div class="flex-grow h-px bg-gray-200 dark:bg-slate-800"></div>
+      </div>
+
+      <div class="relative pl-6 sm:pl-8 border-l-2 border-gray-200 dark:border-slate-800 space-y-10">
+        <!-- Dot indicator -->
+        <div class="absolute w-3 h-3 bg-white dark:bg-slate-900 border-2 border-[var(--accent-color)] rounded-full -left-[7.5px] top-2 shadow-[0_0_8px_var(--accent-color)]"></div>
+        
+        <div class="group relative">
+          <div
+            class="flex flex-col md:flex-row justify-between md:items-baseline mb-2"
+          >
+            <h3
+              class="text-xl font-bold m-0 text-gray-900 dark:text-gray-100 group-hover:text-[var(--accent-color)] transition-colors"
+            >
+              Software Engineer
+            </h3>
+            <span class="text-[var(--accent-color)] font-mono text-sm font-semibold mt-1 md:mt-0 bg-[var(--accent-color)]/10 px-3 py-1 rounded-full inline-block w-max"
+              >2024 - Present</span
+            >
+          </div>
+          <div class="text-lg text-gray-700 dark:text-gray-300 mb-4 font-medium">
+            Company Name &middot; City, Country
+          </div>
+          <ul
+            class="list-disc pl-5 mt-0 space-y-2 text-gray-600 dark:text-gray-400 selection:bg-[var(--accent-color)]/20"
+          >
+            <li>
+              Developed scalable web applications using React, Node.js, and Astro.
+            </li>
+            <li>Optimized database queries reducing load times by 40%.</li>
+            <li>
+              Collaborated with design and product teams to deliver a new
+              minimalist user interface.
+            </li>
+          </ul>
+        </div>
+
+        <div class="group relative">
+           <!-- Dot indicator -->
+           <div class="absolute w-3 h-3 bg-gray-200 dark:bg-slate-700 rounded-full -left-[39.5px] sm:-left-[47.5px] top-2 transition-colors duration-300 group-hover:bg-[var(--accent-color)] group-hover:shadow-[0_0_8px_var(--accent-color)]"></div>
+          
+          <div
+            class="flex flex-col md:flex-row justify-between md:items-baseline mb-2"
+          >
+            <h3
+              class="text-xl font-bold m-0 text-gray-900 dark:text-gray-100 group-hover:text-[var(--accent-color)] transition-colors"
+            >
+              Research Assistant
+            </h3>
+            <span class="text-gray-500 dark:text-gray-400 font-mono text-sm font-medium mt-1 md:mt-0 bg-gray-100 dark:bg-slate-800 px-3 py-1 rounded-full inline-block w-max"
+              >2022 - 2024</span
+            >
+          </div>
+          <div class="text-lg text-gray-700 dark:text-gray-300 mb-4 font-medium">
+            University AI Lab &middot; City, Country
+          </div>
+          <ul
+            class="list-disc pl-5 mt-0 space-y-2 text-gray-600 dark:text-gray-400"
+          >
+            <li>Conducted research on LLMs and agentic workflows.</li>
+            <li>Co-authored a paper published in a top-tier ML conference.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="flex items-center gap-4 mb-6">
+        <h2 class="text-2xl font-bold font-sans text-gray-900 dark:text-gray-50 m-0">Skills</h2>
+        <div class="flex-grow h-px bg-gray-200 dark:bg-slate-800"></div>
+      </div>
+      
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <div class="p-6 rounded-2xl bg-gray-50 dark:bg-slate-800/50 border border-gray-100 dark:border-slate-800">
+          <h3
+            class="text-lg font-bold text-gray-900 dark:text-gray-100 mb-4"
+          >
+            Languages
+          </h3>
+          <div class="flex flex-wrap gap-2">
+            {['JavaScript', 'TypeScript', 'Python', 'HTML/CSS', 'SQL'].map((skill) => (
+              <span class="px-3 py-1.5 bg-white dark:bg-slate-900 text-gray-700 dark:text-gray-300 text-sm font-medium rounded-lg shadow-sm border border-gray-200/50 dark:border-slate-700/50 hover:border-[var(--accent-color)]/50 transition-colors">
+                {skill}
+              </span>
+            ))}
+          </div>
+        </div>
+        <div class="p-6 rounded-2xl bg-gray-50 dark:bg-slate-800/50 border border-gray-100 dark:border-slate-800">
+          <h3
+            class="text-lg font-bold text-gray-900 dark:text-gray-100 mb-4"
+          >
+            Frameworks
+          </h3>
+          <div class="flex flex-wrap gap-2">
+            {['Astro', 'React', 'Next.js', 'Tailwind CSS', 'Express'].map((skill) => (
+               <span class="px-3 py-1.5 bg-white dark:bg-slate-900 text-gray-700 dark:text-gray-300 text-sm font-medium rounded-lg shadow-sm border border-gray-200/50 dark:border-slate-700/50 hover:border-[var(--accent-color)]/50 transition-colors">
+                {skill}
+              </span>
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
   </div>
 </BaseLayout>
