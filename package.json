@@ -3,15 +3,22 @@
   "type": "module",
   "version": "0.0.1",
   "scripts": {
+    "sync-vault": "node scripts/sync-vault.mjs",
+    "predev": "npm run sync-vault",
+    "prebuild": "npm run sync-vault",
     "dev": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
     "astro": "astro"
   },
   "dependencies": {
+    "@astrojs/rss": "^4.0.18",
+    "@astrojs/sitemap": "^3.7.2",
     "@astrojs/tailwind": "^6.0.2",
     "@tailwindcss/vite": "^4.2.1",
     "astro": "^5.17.1",
+    "fast-glob": "^3.3.3",
+    "gray-matter": "^4.0.3",
     "marked": "^17.0.4",
     "rehype-katex": "^7.0.1",
     "remark-math": "^6.0.0",
