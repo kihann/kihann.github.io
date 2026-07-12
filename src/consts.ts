@@ -11,8 +11,8 @@ export const PROFILE = {
     bio: 'AI Researcher specializing in generative agents and code intelligence.',
     about: `안녕하세요, 이기한입니다.`,
     links: {
-        email: 'woonkirov@gmail.com.com',
-        github: 'https://github.com/kihann',
+        email: 'woonkirov@gmail.com',
+        github: 'https://github.com/kihan-lee',
         linkedin: 'https://www.linkedin.com/in/kihan-lee-2b8174240/'
     }
 };

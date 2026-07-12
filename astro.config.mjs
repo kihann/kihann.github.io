@@ -5,7 +5,7 @@ import remarkMath from 'remark-math';
 import rehypeKatex from 'rehype-katex';
 
 export default defineConfig({
-  site: 'https://kihann.github.io',
+  site: 'https://kihan-lee.github.io',
   integrations: [tailwind()],
   markdown: {
     remarkPlugins: [remarkMath],
